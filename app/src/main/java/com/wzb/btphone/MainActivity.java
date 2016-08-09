@@ -32,7 +32,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "debug_ang";
+    public static final String TAG = "wzb";
     public static final int CHOOSE_DEVICE = 1;
 
     public static BluetoothAdapter mBluetoothAdapter;

@@ -7,7 +7,7 @@ import com.socks.library.KLog;
  */
 public class LogUtil {
 
-    public static final String TAG = "debug_ang";
+    public static final String TAG = "wzb";
     public static final boolean DEBUG = true;
 
     public static void d(String msg) {
