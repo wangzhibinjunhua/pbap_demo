@@ -316,7 +316,7 @@ public class BluetoothService extends Service {
                     LogUtil.d("EVENT_PULL_PHONE_BOOK_DONE");
                     sPbapClient.disconnect();
                     Intent intent=new Intent();
-                    intent.putExtra("msg",msg.toString());
+                    intent.putExtra("msg",msg.obj.toString());
                     intent.setAction("libx.wzb.phonemsg");
                     sContext.sendBroadcast(intent);
                 }
