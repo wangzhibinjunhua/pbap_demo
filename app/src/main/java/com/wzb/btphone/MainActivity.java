@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,6 +25,11 @@ import com.socks.library.KLog;
 import com.wzb.btphone.service.BluetoothService;
 import com.wzb.btphone.util.LogUtil;
 import com.wzb.btphone.view.DeviceListActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             if(action.equals("libx.wzb.phonemsg")) {
                 Bundle bundle = intent.getExtras();
                 String msg = bundle.getString("msg");
+                save_vcard(msg);
                 phoneMsg.setText(msg);
             }else if(action.equals("libx.wzb.clientbutton")){
                 btnClient.setEnabled(true);
@@ -71,6 +78,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
+    }
+
+    private void save_vcard(String vcardString){
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            try {
+                OutputStreamWriter writer;
+                File file = new File(Environment.getExternalStorageDirectory(),"example.vcf");
+                writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+                writer.write(vcardString);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

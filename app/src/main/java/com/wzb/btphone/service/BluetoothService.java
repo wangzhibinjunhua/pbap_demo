@@ -331,7 +331,7 @@ public class BluetoothService extends Service {
                 break;
                 case BluetoothPbapClient.EVENT_SESSION_DISCONNECTED: {
                     LogUtil.d("EVENT_SESSION_DISCONNECTED");
-                    sendBroadcastTool("libx.wzb.clientfail");
+                    //sendBroadcastTool("libx.wzb.clientfail");
                 }
                 break;
                 default: {
