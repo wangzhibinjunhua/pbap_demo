@@ -245,14 +245,16 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_establish_pbap)
     public void onEstablishPbap() {
-        sService.establishPbap(sDeviceAddress);
         phoneMsg.setText("初始化...");
+        sService.establishPbap(sDeviceAddress);
+
     }
 
     @OnClick(R.id.btn_establish_socket)
     public void onEstablishSocket() {
-        sService.establishSocket(sDeviceAddress);
         phoneMsg.setText("连接中...");
+        sService.establishSocket(sDeviceAddress);
+
     }
 
 
