@@ -228,6 +228,9 @@ public class BluetoothService extends Service {
                 LogUtil.d("state of sBluetoothSocket : " + sBluetoothSocket.isConnected());
                 if (sBluetoothSocket.isConnected()) {
                     isConnected = true;
+                    Intent intent=new Intent();
+                    intent.setAction("libx.wzb.clientbutton");
+                    sContext.sendBroadcast(intent);
                 }
                 connectTimes = connectTimes + 1;
             }
@@ -312,6 +315,10 @@ public class BluetoothService extends Service {
                 break;
                 case BluetoothPbapClient.EVENT_SESSION_CONNECTED: {
                     LogUtil.d("EVENT_SESSION_CONNECTED");
+                    Intent intent=new Intent();
+                    intent.putExtra("msg",msg.toString());
+                    intent.setAction("libx.wzb.pullphonebook");
+                    sContext.sendBroadcast(intent);
                 }
                 break;
                 case BluetoothPbapClient.EVENT_SESSION_DISCONNECTED: {

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.bluetooth_device_chosen)
     public TextView mDeviceChosen;
 
-    public Button btnSocket,btnClient;
+    public Button btnSocket,btnClient,btnPullBook;
     public TextView phoneMsg;
     public MyReceiver myReceiver=null;
     public class MyReceiver extends BroadcastReceiver{
@@ -59,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 String msg = bundle.getString("msg");
                 phoneMsg.setText(msg);
             }else if(action.equals("libx.wzb.clientbutton")){
-
+                btnClient.setEnabled(true);
+            }else if(action.equals("libx.wzb.pullphonebook")){
+                btnPullBook.setEnabled(true);
             }
         }
 
@@ -73,21 +75,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         phoneMsg=(TextView)findViewById(R.id.msg);
+        btnClient=(Button)findViewById(R.id.btn_establish_pbap);
+        btnSocket=(Button)findViewById(R.id.btn_establish_socket);
+        btnPullBook=(Button)findViewById(R.id.btn_pull_phone_book);
 
+        btnClient.setEnabled(false);
+        btnPullBook.setEnabled(false);
         myReceiver=new MyReceiver();
         IntentFilter filter=new IntentFilter();
         filter.addAction("libx.wzb.phonemsg");
         filter.addAction("libx.wzb.clientbutton");
+        filter.addAction("libx.wzb.pullphonebook");
         MainActivity.this.registerReceiver(myReceiver,filter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
 
         ButterKnife.bind(this);
