@@ -231,6 +231,8 @@ public class BluetoothService extends Service {
                     Intent intent=new Intent();
                     intent.setAction("libx.wzb.clientbutton");
                     sContext.sendBroadcast(intent);
+                }else{
+                    sendBroadcastTool("libx.wzb.connectfail");
                 }
                 connectTimes = connectTimes + 1;
             }
@@ -241,6 +243,12 @@ public class BluetoothService extends Service {
             e.printStackTrace();
         }
 
+    }
+
+    private static void sendBroadcastTool(String action){
+        Intent intent=new Intent();
+        intent.setAction(action);
+        sContext.sendBroadcast(intent);
     }
 
     public void placeCall() {
@@ -323,6 +331,7 @@ public class BluetoothService extends Service {
                 break;
                 case BluetoothPbapClient.EVENT_SESSION_DISCONNECTED: {
                     LogUtil.d("EVENT_SESSION_DISCONNECTED");
+                    sendBroadcastTool("libx.wzb.clientfail");
                 }
                 break;
                 default: {

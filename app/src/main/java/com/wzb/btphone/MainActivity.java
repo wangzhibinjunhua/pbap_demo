@@ -60,8 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 phoneMsg.setText(msg);
             }else if(action.equals("libx.wzb.clientbutton")){
                 btnClient.setEnabled(true);
+                phoneMsg.setText("连接成功");
             }else if(action.equals("libx.wzb.pullphonebook")){
                 btnPullBook.setEnabled(true);
+                phoneMsg.setText("初始化成功");
+            }else if(action.equals("libx.wzb.connectfail")){
+                phoneMsg.setText("连接失败");
+            }else if(action.equals("libx.wzb.clientfail")){
+                phoneMsg.setText("初始化失败");
             }
         }
 
@@ -86,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction("libx.wzb.phonemsg");
         filter.addAction("libx.wzb.clientbutton");
         filter.addAction("libx.wzb.pullphonebook");
+        filter.addAction("libx.wzb.connectfail");
+        filter.addAction("libx.wzb.clientfail");
         MainActivity.this.registerReceiver(myReceiver,filter);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -238,11 +246,13 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.btn_establish_pbap)
     public void onEstablishPbap() {
         sService.establishPbap(sDeviceAddress);
+        phoneMsg.setText("初始化...");
     }
 
     @OnClick(R.id.btn_establish_socket)
     public void onEstablishSocket() {
         sService.establishSocket(sDeviceAddress);
+        phoneMsg.setText("连接中...");
     }
 
 
