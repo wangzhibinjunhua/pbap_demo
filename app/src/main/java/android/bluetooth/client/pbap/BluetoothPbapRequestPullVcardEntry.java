@@ -71,8 +71,7 @@ final class BluetoothPbapRequestPullVcardEntry extends BluetoothPbapRequest {
         Log.v(TAG, "checkResponseCode");
 
         if (mResponse.getCount() == 0) {
-            if (responseCode != ResponseCodes.OBEX_HTTP_NOT_FOUND &&
-                responseCode != ResponseCodes.OBEX_HTTP_NOT_ACCEPTABLE) {
+            if (responseCode != ResponseCodes.OBEX_HTTP_NOT_FOUND) {
                 throw new IOException("Invalid response received");
             } else {
                 Log.v(TAG, "Vcard Entry not found");
